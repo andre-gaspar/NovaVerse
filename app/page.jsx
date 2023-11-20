@@ -35,12 +35,14 @@ export default function Page() {
         </div>
 
         <div className='w-full text-center md:w-3/5'>
+          {/*
           <View className='flex h-96 w-full flex-col items-center justify-center'>
             <Suspense fallback={null}>
               <Logo route='/blob' scale={0.6} position={[0, 0, 0]} />
               <Common />
             </Suspense>
           </View>
+          */}
         </div>
       </div>
 
@@ -51,21 +53,25 @@ export default function Page() {
           <p className='mb-8 text-gray-600'>Drag, scroll, pinch, and rotate the canvas to explore the 3D scene.</p>
         </div>
         <div className='relative my-12 h-48 w-full py-6 sm:w-1/2 md:mb-40'>
+          {/*
           <View orbit className='relative h-full  sm:h-48 sm:w-full'>
             <Suspense fallback={null}>
               <Dog scale={2} position={[0, -1.6, 0]} rotation={[0.0, -0.3, 0]} />
               <Common color={'lightpink'} />
             </Suspense>
           </View>
+          */}
         </div>
         {/* second row */}
         <div className='relative my-12 h-48 w-full py-6 sm:w-1/2 md:mb-40'>
+          {/*
           <View orbit className='relative h-full animate-bounce sm:h-48 sm:w-full'>
             <Suspense fallback={null}>
               <Duck route='/blob' scale={2} position={[0, -1.6, 0]} />
               <Common color={'lightblue'} />
             </Suspense>
           </View>
+          */}
         </div>
         <div className='w-full p-6 sm:w-1/2'>
           <h2 className='mb-3 text-3xl font-bold leading-none text-gray-800'>Dom and 3D are synchronized</h2>
