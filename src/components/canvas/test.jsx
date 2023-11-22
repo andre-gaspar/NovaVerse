@@ -1,7 +1,6 @@
 import { SpriteAnimator, MeshDistortMaterial, shaderMaterial, Sparkles, Clouds, Cloud, Center, useTexture, useGLTF, OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import { useFrame, extend } from '@react-three/fiber'
-import { useRef } from 'react'
 
 export default function Experience()
 {
@@ -12,6 +11,7 @@ export default function Experience()
 
 
     return <>
+        <OrbitControls  makeDefault />
 
         <Center>
             <mesh geometry={ nodes.map_26osm_buildings.geometry }>

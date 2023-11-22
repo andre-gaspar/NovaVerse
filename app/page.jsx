@@ -42,6 +42,7 @@ export default function Page() {
               {/*<Logo route='/blob' scale={0.6} position={[0, 0, 0]} />
               <Common />*/}
               <Experience/>
+              <Common color={'black'} />
             </Suspense>
           </View>
         </div>
@@ -62,6 +63,13 @@ export default function Page() {
             </Suspense>
           </View>
           */}
+
+          <View orbit className='relative h-full  sm:h-48 sm:w-full'>
+            <Suspense fallback={null}>
+              <Logo route='/blob' scale={0.6} position={[0, 0, 0]} />
+              <Common color={'lightpink'} />
+            </Suspense>
+          </View>
         </div>
         {/* second row */}
         <div className='relative my-12 h-48 w-full py-6 sm:w-1/2 md:mb-40'>
