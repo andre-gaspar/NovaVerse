@@ -6,7 +6,7 @@ import { Canvas, useFrame, extend } from '@react-three/fiber'
 
 import * as THREE from 'three'
 extend({ OrbitControls });
-export default function lalala()
+export default function Lalala()
 {
     //const [ hitSound ] = useState(() => new Audio('./hit.mp3'))
     const twister = useRef()
