@@ -48,6 +48,7 @@ export default function Page() {
           cursor: 'pointer',
           userSelect: 'none',
           touchAction: 'manipulation',
+          userSelect: 'none',
         }}
         onTouchStart={startCubeJumpTimer}
         onTouchEnd={stopCubeJumpTimer}
