@@ -1,5 +1,5 @@
 'use client'
-import FFF from './fTest.jsx'
+import FFF from './verse.jsx'
 import { Canvas} from '@react-three/fiber'
 import { useState, useRef, Suspense } from 'react'
 export default function Page() {
