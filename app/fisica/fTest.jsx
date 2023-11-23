@@ -1,13 +1,12 @@
 'use client'
 import { useGLTF, OrbitControls } from '@react-three/drei'
 import { InstancedRigidBodies, CylinderCollider, BallCollider, CuboidCollider, RigidBody, Physics, RapierRigidBody } from '@react-three/rapier'
-import { useMemo, useEffect, useState, useRef } from 'react'
+import { useImperativeHandle, forwardRef, useMemo, useEffect, useState, useRef } from 'react'
 import { Canvas, useFrame, extend } from '@react-three/fiber'
 
 import * as THREE from 'three'
-extend({ OrbitControls });
-export default function Lalala()
-{
+//extend({ OrbitControls });
+const FFF = forwardRef((props, ref) => {
     //const [ hitSound ] = useState(() => new Audio('./hit.mp3'))
     const twister = useRef()
     const cube = useRef()
@@ -81,7 +80,12 @@ export default function Lalala()
         }
     }, [])
 
-    return <>
+    useImperativeHandle(ref, () => ({
+        cubeJump,
+    }));
+
+    return (
+    <>
 
             <OrbitControls ref={controlsRef} />
 
@@ -140,5 +144,6 @@ export default function Lalala()
                 </RigidBody>
 
             </Physics>
-    </>
-}
+    </>);
+});
+export default FFF;

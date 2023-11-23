@@ -1,8 +1,27 @@
 'use client'
 import FFF from './fTest.jsx'
 import { Canvas} from '@react-three/fiber'
-import { Suspense } from 'react'
+import { useRef, Suspense } from 'react'
 export default function Page() {
+  const fffRef = useRef();
+  const buttonPressTimerRef = useRef(null);
+
+  const startCubeJumpTimer = () => {
+    // Trigger cubeJump every 100 milliseconds (adjust the interval as needed)
+    buttonPressTimerRef.current = setInterval(cubeJump, 100);
+  };
+
+  const stopCubeJumpTimer = () => {
+    // Clear the interval when the button is released
+    clearInterval(buttonPressTimerRef.current);
+  };
+
+  const cubeJump = () => {
+    // Your cube movement logic
+    console.log("Cube jumping!");
+    // Access the FFF component's cubeJump function using the ref
+    fffRef.current.cubeJump();
+  };
   return (
     <>
       <Suspense fallback={<Loading />}>
@@ -15,9 +34,25 @@ export default function Page() {
                 far: 800,
                 position: [ 1, 2, 6 ]
             } }>
-                <FFF/>
+                <FFF ref={fffRef}/>
         </Canvas>   
-       </Suspense>  
+       </Suspense> 
+       <button
+        style={{
+          position: 'absolute',
+          top: '10px',
+          left: '10px',
+          padding: '10px',
+          backgroundColor: 'blue',
+          color: 'white',
+          cursor: 'pointer',
+          userSelect: 'none',
+        }}
+        onPointerDown={startCubeJumpTimer}
+        onPointerUp={stopCubeJumpTimer}
+      >
+        Move Cube
+      </button> 
     </>
   )
 }
