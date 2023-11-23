@@ -47,10 +47,14 @@ export default function Page() {
           color: 'white',
           cursor: 'pointer',
           userSelect: 'none',
+          touchAction: 'manipulation',
         }}
-        onPointerDown={startCubeJumpTimer}
-        onPointerUp={stopCubeJumpTimer}
+        onTouchStart={startCubeJumpTimer}
+        onTouchEnd={stopCubeJumpTimer}
+        onMouseDown={startCubeJumpTimer} // For non-touch devices
+        onMouseUp={stopCubeJumpTimer} // For non-touch devices
       >
+        Move Cube
       </button> 
     </>
   )
