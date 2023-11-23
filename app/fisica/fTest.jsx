@@ -146,4 +146,5 @@ const FFF = forwardRef((props, ref) => {
             </Physics>
     </>);
 });
+FFF.displayName = 'MyFFF';
 export default FFF;
