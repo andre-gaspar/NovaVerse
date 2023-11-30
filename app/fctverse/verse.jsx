@@ -2,11 +2,13 @@
 import { useGLTF, OrbitControls, useTexture} from '@react-three/drei'
 import { InstancedRigidBodies, CylinderCollider, BallCollider, CuboidCollider, RigidBody, Physics, RapierRigidBody } from '@react-three/rapier'
 import { useImperativeHandle, forwardRef, useMemo, useEffect, useState, useRef } from 'react'
-import { Canvas, useFrame, extend } from '@react-three/fiber'
+import { useFrame } from '@react-three/fiber'
+import Model from './caracther.jsx'
 
 import * as THREE from 'three'
 const FFF = forwardRef((props, ref) => {
     const cube = useRef()
+    const man = useRef()
     //const cube = useRef<RapierRigidBody>(null);
     const { nodes } = useGLTF('/departamental.glb')
     console.log(nodes)
@@ -23,7 +25,13 @@ const FFF = forwardRef((props, ref) => {
         const targetPosition = new THREE.Vector3(pos.x, 0, pos.z);
         controlsRef.current.target.lerp(targetPosition, 0.1); // Adjust the interpolation factor as needed
         //controlsRef.current.target.set(pos.x, 0, pos.z);
+        
+        if (man.current) {
+            console.log("hehehhehehhee")
+            man.current.position.lerp(pos, 0.1);
+        }
         controlsRef.current.update();
+        
     })
 
 
@@ -54,10 +62,11 @@ const FFF = forwardRef((props, ref) => {
 
     return (
     <>
-
             <OrbitControls ref={controlsRef} />
-
+            
             <Physics gravity={ [ 0, - 9.08, 0 ] } debug>
+                {/*position={[90, 0, 0]}*/}
+                <Model ref={man}  />
 
                 <RigidBody
                     ref={ cube }
@@ -71,7 +80,7 @@ const FFF = forwardRef((props, ref) => {
                     // onSleep={ () => { console.log('sleep') } }
                     // onWake={ () => { console.log('wake') } }
                 >
-                    <mesh  castShadow onClick={cubeJump}>
+                    <mesh onClick={cubeJump}>
                         <boxGeometry />
                         <meshStandardMaterial color="mediumpurple" />
                     </mesh>

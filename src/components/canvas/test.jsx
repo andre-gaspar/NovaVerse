@@ -6,7 +6,7 @@ export default function Experience()
 {
     const { nodes } = useGLTF('/departamental.glb')
     console.log(nodes)
-    const bakedTexture = useTexture('/bakedFinalPaint.jpg')
+    const bakedTexture = useTexture('/bakedFinalPlastic.jpg')
     bakedTexture.flipY = false
 
 
@@ -28,7 +28,7 @@ export default function Experience()
 
             <Sparkles
 		        size={ 100 }
-                scale={ [ 200, 50, 200 ] }
+                scale={ [ 250, 70, 250 ] }
                 position-y={ 15 }
                 speed={ 5 }
                 count={ 1000 }

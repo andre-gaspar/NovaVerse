@@ -24,7 +24,7 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 export default function Page() {
   return (
     <>
-    <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'ivory' }}>
+    <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'black' }}>
         {/*<View orbit className='flex h-96 w-full flex-col items-center justify-center'>*/}
         <Canvas
         flat

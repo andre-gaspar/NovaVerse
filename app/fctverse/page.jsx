@@ -2,6 +2,7 @@
 import FFF from './verse.jsx'
 import { Canvas} from '@react-three/fiber'
 import { useState, useRef, Suspense } from 'react'
+import { Model } from "./caracther";
 export default function Page() {
   const fffRef = useRef();
   const timerRef = useRef(null);
