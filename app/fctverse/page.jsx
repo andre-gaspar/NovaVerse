@@ -79,8 +79,8 @@ export default function Page() {
         //onTouchEnd={stopCubeJumpTimer}
         //onMouseDown={startCubeJumpTimer} // For non-touch devices
         //onMouseUp={stopCubeJumpTimer} // For non-touch devices
-        onClick={isIntervalRunning ? stopInterval : startInterval}
-        //onClick={startCutscene}
+        //onClick={isIntervalRunning ? stopInterval : startInterval}
+        onClick={startCutscene}
       >
         {isIntervalRunning ? 'Stop Interval' : 'Start Interval'}
       </button> 
