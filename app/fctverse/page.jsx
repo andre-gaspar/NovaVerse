@@ -2,22 +2,24 @@
 import FFF from './verse.jsx'
 import { Canvas} from '@react-three/fiber'
 import { useState, useRef, Suspense } from 'react'
-import { Model } from "./caracther";
+import VideoCutscene from './cutscene.jsx';
+
 export default function Page() {
   const fffRef = useRef();
   const timerRef = useRef(null);
   const [isIntervalRunning, setIsIntervalRunning] = useState(false);
-  /*
-  const startCubeJumpTimer = () => {
-    // Trigger cubeJump every 100 milliseconds (adjust the interval as needed)
-    buttonPressTimerRef.current = setInterval(cubeJump, 100);
+
+  const [isCutscenePlaying, setIsCutscenePlaying] = useState(false);
+
+  const startCutscene = () => {
+    setIsCutscenePlaying(true);
   };
 
-  const stopCubeJumpTimer = () => {
-    // Clear the interval when the button is released
-    clearInterval(buttonPressTimerRef.current);
+  const handleCutsceneFinish = () => {
+    setIsCutscenePlaying(false);
+    // Additional logic when the cutscene finishes, if needed
   };
-  */
+
   const startInterval = () => {
     if (!isIntervalRunning) {
       // Start the interval every 100 milliseconds (adjust the interval as needed)
@@ -34,25 +36,32 @@ export default function Page() {
 
   const cubeJump = () => {
     // Your cube movement logic
-    console.log("Cube jumping!");
+    //console.log("Cube jumping!");
     // Access the FFF component's cubeJump function using the ref
     fffRef.current.cubeJump();
   };
   return (
     <>
-      <Suspense fallback={<Loading />}>
-        <Canvas
-            flat
-            dpr={[1, 1]}
-            camera={ {
-                fov: 45,
-                near: 0.1,
-                far: 800,
-                position: [ 1, 2, 6 ]
-            } }>
-                <FFF ref={fffRef}/>
-        </Canvas>   
-       </Suspense> 
+      {!isCutscenePlaying ? (
+        <Suspense fallback={<Loading />}>
+          <Canvas
+              flat
+              dpr={[1, 1]}
+              camera={ {
+                  fov: 45,
+                  near: 0.1,
+                  far: 800,
+                  position: [ 1, 2, 6 ]
+              } }>
+                  <FFF ref={fffRef}/>
+          </Canvas>   
+        </Suspense> 
+       ) : (
+        <VideoCutscene
+          videoPath="/0001-0350.mp4"
+          onFinish={handleCutsceneFinish}
+        />
+      )}
        <button
         style={{
           position: 'absolute',
@@ -71,6 +80,7 @@ export default function Page() {
         //onMouseDown={startCubeJumpTimer} // For non-touch devices
         //onMouseUp={stopCubeJumpTimer} // For non-touch devices
         onClick={isIntervalRunning ? stopInterval : startInterval}
+        //onClick={startCutscene}
       >
         {isIntervalRunning ? 'Stop Interval' : 'Start Interval'}
       </button> 

@@ -6,9 +6,9 @@ import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three';
 
 const Model = forwardRef((props, ref) => {
-  const group = useRef();
   const { nodes, materials, animations } = useGLTF("/myman.glb");
   const { actions } = useAnimations(animations, ref);
+  const { cameraDirection } = props;
   
   useEffect(() => {
     actions.walking.play();
@@ -16,8 +16,10 @@ const Model = forwardRef((props, ref) => {
 
   useFrame(() => {
     // Example: Make the model look at a specific point
-    const lookAtPoint = new THREE.Vector3(0, 0, 0); // Change the coordinates as needed
-    ref.current.lookAt(lookAtPoint);
+    const lookAtPoint = new THREE.Vector3(0, 10, 0); // Change the coordinates as needed
+    ref.current.lookAt(cameraDirection);
+    console.log("cameraaaaaaaa")
+    console.log(cameraDirection)
   });
   
   return (

@@ -7,12 +7,13 @@ import Model from './caracther.jsx'
 
 import * as THREE from 'three'
 const FFF = forwardRef((props, ref) => {
+    const [cameraDirection, setCameraDirection] = useState(new THREE.Vector3());
     const cube = useRef()
     const man = useRef()
     //const cube = useRef<RapierRigidBody>(null);
     const { nodes } = useGLTF('/departamental.glb')
-    console.log(nodes)
-    const bakedTexture = useTexture('/bakedFinalPaint.jpg')
+    //console.log(nodes)
+    const bakedTexture = useTexture('/bakedFinal.jpg')
     bakedTexture.flipY = false
 
     const controlsRef = useRef();
@@ -22,12 +23,17 @@ const FFF = forwardRef((props, ref) => {
 
         // Update the controls on each frame
         const pos=cube.current.translation();
-        const targetPosition = new THREE.Vector3(pos.x, 0, pos.z);
-        controlsRef.current.target.lerp(targetPosition, 0.1); // Adjust the interpolation factor as needed
+        if(cube.current){
+            const targetPosition = new THREE.Vector3(pos.x, pos.y, pos.z);
+            controlsRef.current.target.lerp(targetPosition, 0.1);
+            // Update the camera direction state
+            const newCameraDirection = targetPosition;
+            setCameraDirection(newCameraDirection);
+        }
         //controlsRef.current.target.set(pos.x, 0, pos.z);
         
         if (man.current) {
-            console.log("hehehhehehhee")
+            //console.log("hehehhehehhee")
             man.current.position.lerp(pos, 0.1);
         }
         controlsRef.current.update();
@@ -38,19 +44,19 @@ const FFF = forwardRef((props, ref) => {
     const cubeJump = () =>
     {
         
-        console.log("lets fucking gooooo")
+        //console.log("lets fucking gooooo")
         // Get the camera direction vector
         const cameraDirection = controlsRef.current.target.clone()
         .sub(controlsRef.current.object.position)
         .normalize();
 
-        console.log('Camera Direction:', cameraDirection);
+        //console.log('Camera Direction:', cameraDirection);
         // Apply impulse only in the x and z axis in the camera direction
         const impulseX = cameraDirection.x * 2;
         const impulseZ = cameraDirection.z * 2;
 
         const mass = cube.current.mass();
-        console.log(mass);
+        //console.log(mass);
         cube.current.applyImpulse({ x: impulseX, y: 0, z: impulseZ }, true);
         //cube.current.applyImpulse({ x: 0, y: 10, z: 0 }, true);
         
@@ -66,7 +72,7 @@ const FFF = forwardRef((props, ref) => {
             
             <Physics gravity={ [ 0, - 9.08, 0 ] } debug>
                 {/*position={[90, 0, 0]}*/}
-                <Model ref={man}  />
+                <Model ref={man} cameraDirection={cameraDirection} />
 
                 <RigidBody
                     ref={ cube }

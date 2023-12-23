@@ -4,22 +4,25 @@ import { useFrame, extend } from '@react-three/fiber'
 
 export default function Experience()
 {
-    const { nodes } = useGLTF('/departamental.glb')
+    const { nodes } = useGLTF('/all.glb')
     console.log(nodes)
-    const bakedTexture = useTexture('/bakedFinalPlastic.jpg')
-    bakedTexture.flipY = false
-
+    const plane = useTexture('/plane.jpeg')
+    const dep = useTexture('/redDepartamental.jpeg')
+    plane.flipY = false
+    dep.flipY = false
+    console.log(nodes)
 
     return <>
         <OrbitControls  makeDefault />
 
         <Center>
-            <mesh geometry={ nodes.map_26osm_buildings.geometry }>
-                <meshBasicMaterial map={ bakedTexture } />
-            </mesh>
             
             <mesh geometry={ nodes.Plane.geometry }>
-                <meshBasicMaterial map={ bakedTexture } />
+                <meshBasicMaterial map={ plane } />
+            </mesh>
+            
+            <mesh geometry={ nodes.departamental.geometry }>
+                <meshBasicMaterial map={ dep } />
             </mesh>
             <Clouds material={THREE.MeshBasicMaterial}>
                 <Cloud scale={5} position={[-100, 100, 100]} segments={40} bounds={[10, 2, 2]} volume={10} color="orange" />
