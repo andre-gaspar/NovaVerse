@@ -18,8 +18,8 @@ const Model = forwardRef((props, ref) => {
     // Example: Make the model look at a specific point
     const lookAtPoint = new THREE.Vector3(0, 10, 0); // Change the coordinates as needed
     ref.current.lookAt(cameraDirection);
-    console.log("cameraaaaaaaa")
-    console.log(cameraDirection)
+    //console.log("cameraaaaaaaa")
+    //console.log(cameraDirection)
   });
   
   return (

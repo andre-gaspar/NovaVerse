@@ -1,12 +1,17 @@
 'use client'
+import { get, ref, set, onValue } from "firebase/database";
 import { useGLTF, OrbitControls, useTexture} from '@react-three/drei'
 import { InstancedRigidBodies, CylinderCollider, BallCollider, CuboidCollider, RigidBody, Physics, RapierRigidBody } from '@react-three/rapier'
 import { useImperativeHandle, forwardRef, useMemo, useEffect, useState, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import Model from './caracther.jsx'
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+//import { get, ref } from "firebase/database";
+import {database} from "./firebaseConfig.js"
 
 import * as THREE from 'three'
-const FFF = forwardRef((props, ref) => {
+const FFF = forwardRef((props, referencia) => {
     const [cameraDirection, setCameraDirection] = useState(new THREE.Vector3());
     const cube = useRef()
     const man = useRef()
@@ -15,8 +20,36 @@ const FFF = forwardRef((props, ref) => {
     //console.log(nodes)
     const bakedTexture = useTexture('/bakedFinal.jpg')
     bakedTexture.flipY = false
-
     const controlsRef = useRef();
+
+    const [users, setUsers] = useState([]);
+    /*
+    useEffect(() => {
+        const dbRef = ref(database, 'users');
+        console.log("dbRef");
+        console.log(dbRef);
+        // Set initial positions
+        set(dbRef, {
+            rrrrrr: { x: 0, y: 200, z: 0 },
+            ttttttt: { x: 0, y: 300, z: 0 },
+            // Add more players as needed
+        });
+
+        // Listen for changes to player positions
+        const usersListener = onValue(dbRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            //setUsers(data);
+            console.log("data444444");
+            console.log(data);
+        }
+        });
+
+        return () => {
+        // Clean up the listener when the component unmounts
+        usersListener();
+        };
+    }, [])*/
     useFrame((state) =>
     {
         const time = state.clock.getElapsedTime()
@@ -29,6 +62,8 @@ const FFF = forwardRef((props, ref) => {
             // Update the camera direction state
             const newCameraDirection = targetPosition;
             setCameraDirection(newCameraDirection);
+            // Update player position in the database
+            //set(ref(database, `users/ttttttt`), { x: pos.x, y: pos.y, z: pos.z });
         }
         //controlsRef.current.target.set(pos.x, 0, pos.z);
         
@@ -62,7 +97,7 @@ const FFF = forwardRef((props, ref) => {
         
     }
 
-    useImperativeHandle(ref, () => ({
+    useImperativeHandle(referencia, () => ({
         cubeJump,
     }));
 
